@@ -3,12 +3,24 @@ import TodoListItem from './TodoListItem'
 import './Styles.css'
 
 export default class TodoList extends React.Component {
-    state = {
-        list_title: "List!",
-        current_value: 'valor',
-        todos: [
-           
-        ]
+    
+    constructor(){
+        super()
+        this.state = {
+            list_title: "List!",
+            current_value: 'valor',
+            todos: [
+               
+            ]
+        }
+
+        this.deleteTodoByIndex = this.deleteTodoByIndex.bind(this)
+    }
+
+   
+
+    deleteTodoByIndex(index){
+        console.log('index: ', index)
     }
 
     render (){
@@ -26,10 +38,10 @@ export default class TodoList extends React.Component {
                 <br />
 
                 {
-                    this.state.todos.map(todo => {
+                    this.state.todos.map((todo, index) => {
                         return (
                             <div>
-                               <TodoListItem title={todo.title} completed={todo.completed}/>
+                               <TodoListItem key={index} index={index} deleteTodoByIndex={this.deleteTodoByIndex} title={todo.title} completed={todo.completed}/>
                             </div>
                         )
                     })
